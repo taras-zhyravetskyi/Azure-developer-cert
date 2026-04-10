@@ -9,9 +9,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,10 +16,10 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Java version
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'microsoft'
@@ -31,7 +28,7 @@ jobs:
         run: mvn clean install
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
@@ -42,15 +39,15 @@ jobs:
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
-  
+
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: java-app
-      
+
       - name: Login to Azure
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0F5521AA3715411A8356B87002F9BF71 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_28FB9F66AF09421FB7C4FF28788E020D }}
@@ -63,4 +60,3 @@ jobs:
           app-name: ${{ secrets.AZURE_APP_NAME }}
           slot-name: 'Production'
           package: '*.jar'
-          
