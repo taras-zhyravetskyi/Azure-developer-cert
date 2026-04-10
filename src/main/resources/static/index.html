@@ -76,6 +76,30 @@
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    }
+
+    .endpoint:hover {
+      background: #eff6ff;
+      border-color: #0078d4;
+      transform: translateY(-1px);
+    }
+
+    .endpoint:active { transform: translateY(0); }
+
+    .arrow {
+      margin-left: auto;
+      color: #94a3b8;
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .endpoint:hover .arrow {
+      color: #0078d4;
+      transform: translateX(3px);
     }
 
     .method {
@@ -180,16 +204,18 @@
         API Endpoints
       </h2>
       <div class="endpoint-list">
-        <div class="endpoint">
+        <a class="endpoint" href="/hello.html" target="_blank">
           <span class="method">GET</span>
-          <span class="path">/</span>
+          <span class="path">/hello</span>
           <span class="desc">Returns a greeting message</span>
-        </div>
-        <div class="endpoint">
+          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a class="endpoint" href="/health" target="_blank">
           <span class="method">GET</span>
           <span class="path">/health</span>
           <span class="desc">Health check</span>
-        </div>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
     </div>
 

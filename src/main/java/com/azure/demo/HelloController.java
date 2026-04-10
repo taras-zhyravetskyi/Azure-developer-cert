@@ -2,13 +2,14 @@ package com.azure.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 public class HelloController {
 
-    @GetMapping("/")
-    public String hello() {
-        return "Hello from Azure App Service!";
+    @GetMapping("/hello")
+    public RedirectView hello() {
+        return new RedirectView("/hello.html");
     }
 
     @GetMapping("/health")
